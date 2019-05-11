@@ -64,14 +64,16 @@ Spring Boot(Spring BootはDell配下のPivotal開発て知ってました?)はJP
     GET http://localhost:8080/api/employee/hello
     ```
 # 利用Fraction
-認識しているのは以下だが、Mavenの依存関係自動解決で他にも色々適用されている様子。
 
-|フラクション||
+|フラクション|役割|
 |---|---|
-|jaxrs-jsonp||
-|jpa-eclipselink||
-|datasources|
-|cdi||
+|jaxrs-jsonp|JAX-RSとJSON-Pを使用する|
+|jpa-eclipselink|JPAのEclipseLink実装を利用する|
+|datasources|thorntail上からデータベースへのコネクションプールを張る|
+|cdi|Dependency Injectionを利用する。|
+
+認識しているのは上記だが、Mavenの依存関係自動解決で他にも色々適用されている様子。
+![](./img/1.png)
 
 # API 仕様(現時点)
 ```
