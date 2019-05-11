@@ -3,6 +3,11 @@ thorntailお勉強のために作成。
 ビルドツールをダウンロードしなくても済むのでGradle派だったが、thorntailはGradleだと色々不具合があり、Mavenで実装。  
 Spring BootはJPAがHibernate標準だったり、REST API周りが独自実装であまり好きではないので、Java EEを適用可能なthorntailを実験中。
 
+# やりたいこと
+従業員管理サービスのマイクロサービス。  
+throntailを導入してuberjarとしてKubernetes上で起動したい。
+
+
 # 利用Fraction
 認識しているのは以下だが、Mavenの依存関係自動解決で他にも色々適用されている様子。
 
@@ -14,8 +19,11 @@ Spring BootはJPAがHibernate標準だったり、REST API周りが独自実装�
 |cdi||
 
 # API 仕様(現時点)
+```
 http://<thorntail>:8080/api/employee/hello
+```
 
+今はまだHello Worldレベル。
 EMPLOYEEテーブルにあるすべての従業員を引っ張りだしてくる。
 
 # テーブル
@@ -81,6 +89,10 @@ create index IDX_LAST_NAME
 
 create index IDX_MIDDLE_NAME
 	on EMPLOYEE (MIDDLE_NAME);
-
-
 ```
+
+# 確認している問題
+* MySQLのコネクタを8.xもしくは6.xの新し目のものにするとthorntailが起動しない。
+* MavenではなくGradleを利用すると同じコードでも起動しない。packageゴールで色々問題が発生している？
+* MySQLを依存関係に入れてthrontailを起動すると勝手にDataSourceとして認識する様子。
+  * RESOURCE_LOCALは認識しない？
