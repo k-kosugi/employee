@@ -20,7 +20,7 @@ Spring Boot(Spring BootはDell配下のPivotal開発て知ってました?)はJP
     ```
     $ docker build -t netapp/employeedb:v1 . 
     ```
-2. イメージを元にビルド。
+2. イメージを元に起動。
     * 以下はビルド時に永続ボリュームを指定していないので注意が必要です。
     * もし、コンテナを削除してテーブルデータが消えたら問題がある人は -v employeedb_volume:/var/lib/mysqlをオプションで投入するなりして永続ボリュームを適用しましょう。
     ```
