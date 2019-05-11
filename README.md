@@ -9,6 +9,7 @@ throntailを導入してuberjarとしてKubernetes上で起動したい。
 ビルドツールをダウンロードしなくても済むのでGradle派だったが、thorntailはGradleだと色々不具合があり、Mavenで実装。  
 Spring Boot(Spring BootはDell配下のPivotal開発て知ってました?)はJPAがHibernate標準だったり、REST API周りが独自実装であまり好きではないので、Java EEを適用可能なthorntailを実験中。
   
+あと、SpringBoot使うとサーキットブレーカー等が使えるようですが、Istio使えば実装する必要なしです。  
 
 # 使い方
 ## 1. MySQLの起動
