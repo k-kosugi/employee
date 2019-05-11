@@ -1,13 +1,64 @@
-# EMPLOYEE
+# 目的
 thorntailお勉強のために作成。  
 ビルドツールをダウンロードしなくても済むのでGradle派だったが、thorntailはGradleだと色々不具合があり、Mavenで実装。  
 Spring BootはJPAがHibernate標準だったり、REST API周りが独自実装であまり好きではないので、Java EEを適用可能なthorntailを実験中。
-
-# やりたいこと
+  
 従業員管理サービスのマイクロサービス。  
 throntailを導入してuberjarとしてKubernetes上で起動したい。
 
+# 使い方
+## 1. MySQLの起動
+データベースはMySQL on Docker。
+以下のコマンドを投入してdockerを起動。
 
+1. Dockerfileが存在するディレクトリでdockerイメージをビルド。タグ名はnetapp/employeedb:v1だが他のものでも問題なし。
+    ```
+    $ docker build -t netapp/employeedb:v1 . 
+    ```
+2. イメージを元にビルド。
+    * 以下はビルド時に永続ボリュームを指定していないので注意が必要です。
+    * もし、コンテナを削除してテーブルデータが消えたら問題がある人は -v employeedb_volume:/var/lib/mysqlをオプションで投入するなりして永続ボリュームを適用しましょう。
+    ```
+    $ docker run -d --name employeedb -p 3306:3306 netapp/employeedb:v1
+    ```
+3. データの投入  
+    load.sqlをpersisntece.xmlに定義し、起動時にINSERT文を大量にロードする予定なので、本来は以下の処理は不要です。
+    1. docker上のOSに入る。
+        ```
+        $ docker exec -it employeedb /bin/bash
+        ```
+    1. mysqlコマンドを叩いてMySQLにログイン
+        ```
+        $ mysql -u kenta -p
+        kosugi
+        ```
+    1. employeedbにアタッチ
+        ```
+        mysql> use employeedb
+        ```
+    1. 適当なデータを入れてください。※必要なだけ
+        ```
+        mysql> insert into employee values('0347255', 'kenta', 'kosugi', null, null);
+        ```
+## 2. throntailのビルド
+1. Mavenのpackageゴールを指定してwar/jarを作成
+    ```
+    $ mvn package
+    ```
+1. targetディレクトリに以下二つのjar/warが作成されることを確認。
+    * target/employee.war
+        * こちらがwarファイルのようです。試していませんが、Wildflyなどにデプロイすれば普通に動くのではないかと思います。
+    * target/employee-thorntail.jar
+        * こちらがuberjarと呼ばれるファイル。内部にthorntailを起動するためのBootStrapや起動に必要なjar群が固まって格納されています。
+1. java コマンドを使用してjarファイルを起動。
+    ```
+    $ java -jar target/employee-thorntail.jar -s./project-defaults.yaml
+    ```
+## 3. REST APIへアクセス
+1. VSCodeのREST Clientなどを使用して、REST APIにアクセス。
+    ```
+    GET http://localhost:8080/api/employee/hello
+    ```
 # 利用Fraction
 認識しているのは以下だが、Mavenの依存関係自動解決で他にも色々適用されている様子。
 
@@ -20,11 +71,13 @@ throntailを導入してuberjarとしてKubernetes上で起動したい。
 
 # API 仕様(現時点)
 ```
-http://<thorntail>:8080/api/employee/hello
+http://localhost:8080/api/employee/hello
 ```
 
 今はまだHello Worldレベル。
-EMPLOYEEテーブルにあるすべての従業員を引っ張りだしてくる。
+EMPLOYEEテーブルにあるすべての従業員を引っ張りだしてくる。    
+thorntail起動マシン以外からアクセスするとクロスドメインの問題が発生すると思うので、[ここ](http://garapon.hatenablog.com/entry/2016/03/23/JAX-RS2.0でRESTサービスを作る際にヘッダーを指定する)の対策をしましょう
+。
 
 # テーブル
 コードファーストで実装しているので、thorntailを起動すると勝手にテーブルを作成します。
