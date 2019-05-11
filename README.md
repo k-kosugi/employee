@@ -26,7 +26,7 @@ Spring Boot(Spring BootはDell配下のPivotal開発て知ってました?)はJP
     ```
     $ docker run -d --name employeedb -p 3306:3306 netapp/employeedb:v1
     ```
-3. データの投入  
+3. データの投入。※このデータの投入をそのまま実行してしまうとテーブルが作成されていないのでエラーになります。先に2.のthorntailのビルドと起動を実施してテーブルを自動で作成してください。 
     load.sqlをpersisntece.xmlに定義し、起動時にINSERT文を大量にロードする予定なので、本来は以下の処理は不要です。
     1. docker上のOSに入る。
         ```
@@ -45,7 +45,7 @@ Spring Boot(Spring BootはDell配下のPivotal開発て知ってました?)はJP
         ```
         mysql> insert into employee values('0347255', 'kenta', 'kosugi', null, null);
         ```
-## 2. thorntailのビルド
+## 2. thorntailのビルドと起動
 1. Mavenのpackageゴールを指定してwar/jarを作成
     ```
     $ mvn package
