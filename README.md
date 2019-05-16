@@ -9,9 +9,9 @@ throntailを導入してuberjarとしてKubernetes上で起動したい。
 RedHatの人曰く、thorntailは終了するらしい。
 続きはQUARKUSプロジェクトとWildFlyプロジェクトに別れるらしい。
 
-QUARKUSはJavaソースコードをLihuxバイナリに直接変換することでJava VMの巨大なFoot Printを抑えるらしい。
-これにより、マイクロサービスはJava VM上で動作するのではなく、直接Linux上で動作するようになる。
-何が言いたいかと言うとKubernetesのコンテナに乗りやすくなるということ。
+QUARKUSはJavaソースコードをLihuxバイナリ(x86)に直接変換することでJava VMの巨大なFoot Printを抑える。
+これにより、マイクロサービスとして適用しやすくなる。
+何が言いたいかと言うとKubernetesに乗りやすくなるということ。
 ```
 
 ## ビルドツールやその他
