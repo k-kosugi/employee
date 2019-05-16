@@ -5,6 +5,15 @@ thorntailとはなんぞやという人は[ここ](https://www.publickey1.jp/blo
 従業員管理サービスのマイクロサービスを実装する。  
 throntailを導入してuberjarとしてKubernetes上で起動したい。
 
+```
+RedHatの人曰く、thorntailは終了するらしい。
+続きはQUARKUSプロジェクトとWildFlyプロジェクトに別れるらしい。
+
+QUARKUSはJavaソースコードをLihuxバイナリに直接変換することでJava VMの巨大なFoot Printを抑えるらしい。
+これにより、マイクロサービスはJava VM上で動作するのではなく、直接Linux上で動作するようになる。
+何が言いたいかと言うとKubernetesのコンテナに乗りやすくなるということ。
+```
+
 ## ビルドツールやその他
 ビルドツールをダウンロードしなくても済むのでGradle派だったが、thorntailはGradleだと色々不具合があり、Mavenで実装。  
 Spring Boot(Spring BootはDell配下のPivotal開発て知ってました?)はJPAがHibernate標準だったり、REST API周りが独自実装であまり好きではないので、Java EEを適用可能なthorntailを実験中。
@@ -156,3 +165,6 @@ create index IDX_MIDDLE_NAME
 * MavenではなくGradleを利用すると同じコードでも起動しない。packageゴールで色々問題が発生している？
 * MySQLを依存関係に入れてthrontailを起動すると勝手にDataSourceとして認識する様子。
   * RESOURCE_LOCALは認識しない？
+  
+# 今後
+thorntail + MySQLを一つのPodとしてKubernetesにデプロイして運用できるようにする。
