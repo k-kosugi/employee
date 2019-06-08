@@ -63,7 +63,7 @@
         </dependency>
         <dependency>
             <groupId>io.thorntail</groupId>
-            <artifactId>datasources</artifactId>
+            <artifactId>ejb</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
