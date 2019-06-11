@@ -35,6 +35,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: io.thorntail:jpa-eclipselink:2.4.0.Final" level="project" />
     <orderEntry type="library" name="Maven: io.thorntail:jpa:2.4.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.thorntail:datasources:2.4.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.ironjacamar:ironjacamar-jdbc:1.4.11.Final" level="project" />
     <orderEntry type="library" name="Maven: io.thorntail:infinispan:2.4.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.infinispan:infinispan-core:9.4.3.Final" level="project" />
     <orderEntry type="library" name="Maven: org.infinispan:infinispan-commons:9.4.3.Final" level="project" />
@@ -111,13 +113,14 @@
     <orderEntry type="library" name="Maven: org.jboss.openjdk-orb:openjdk-orb:8.0.4.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.enterprise:cdi-api:2.0.SP1" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
-    <orderEntry type="library" name="Maven: io.thorntail:datasources:2.4.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.thorntail:ejb:2.4.0.Final" level="project" />
     <orderEntry type="library" name="Maven: io.thorntail:jca:2.4.0.Final" level="project" />
     <orderEntry type="library" name="Maven: io.thorntail:connector:2.4.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.resource:jboss-connector-api_1.7_spec:1.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: io.thorntail:security:2.4.0.Final" level="project" />
     <orderEntry type="library" name="Maven: io.thorntail:elytron:2.4.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.ironjacamar:ironjacamar-jdbc:1.4.11.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.spec.javax.ejb:jboss-ejb-api_3.2_spec:1.0.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.ejb3:jboss-ejb3-ext-api:2.2.0.Final" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.47" level="project" />
   </component>
 </module>

@@ -2,6 +2,7 @@ package org.kenta.kosugi.employee.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "EMPLOYEE", indexes = {
@@ -33,4 +34,47 @@ public class Employee implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Employee boss;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "HIRE_DATE", nullable = false)
+    public Calendar hireDate;
+
+    /**
+     * Constructor for Employee class.
+     */
+    public Employee(){
+    }
+
+    /**
+     * Constructor for Employee class.
+     * @param id id
+     * @param firstName First name.
+     * @param middleName Middle name.
+     * @param lastName Last name.
+     * @param boss The boss object of this employoee.
+     * @param hireDate Hire date.
+     */
+    public Employee(String id, String firstName, String middleName, String lastName, Employee boss, Calendar hireDate) {
+        this.id = id;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.boss = boss;
+        this.hireDate = hireDate;
+    }
+
+    /**
+     * Constructor for Employee class.
+     * @param id id
+     * @param firstName First name.
+     * @param middleName Middle name.
+     * @param lastName Last name.
+     * @param hireDate Hire date.www
+     */
+    public Employee(String id, String firstName, String middleName, String lastName, Calendar hireDate) {
+        this.id = id;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.hireDate = hireDate;
+    }
 }

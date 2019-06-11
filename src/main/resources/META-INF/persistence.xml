@@ -22,9 +22,15 @@
             <property name="eclipselink.logging.session" value="false"/>
             <property name="eclipselink.logging.thread" value="false"/>
             <property name="eclipselink.logging.timestamp" value="false"/>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
             <property name="javax.persistence.schema-generation.drop-source" value="metadata"/>
+
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/employee"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="kenta"/>
+            <property name="javax.persistence.jdbc.password" value="kosugi"/>
+
         </properties>
     </persistence-unit>
 </persistence>
