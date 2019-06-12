@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Employee class.
+ * This class is EJB Object(Stateless Session Bean) for using JTA transaction.
  */
 @Path("/employee")
 @Produces(MediaType.APPLICATION_JSON)
@@ -78,16 +79,16 @@ public class EmployeeResource {
     }
 
     /**
-     * Regist the boss object to employee object.
+     * Register the boss object to employee object.
      *
      * @param id     Employee id.
      * @param bossId Boss's employee id.
-     * @return Return the 200 OK response when regist request success.
-     * Return the 404 NG response when regist request fail.
+     * @return Return the 200 OK response when register request success.
+     * Return the 404 NG response when register request fail.
      */
     @PUT
-    @Path("/regist/{id}/boss")
-    public Response registBoss(
+    @Path("/register/{id}/boss")
+    public Response registerBoss(
             @PathParam("id") String id, @QueryParam("bossId") String bossId) {
 
         // Find the employee object by using employee id.
@@ -112,8 +113,8 @@ public class EmployeeResource {
     }
 
     /**
-     * Delete the employee object from this EMPLOYEE table.
-     * Set the leaved date to this employee object.
+     * Delete the employee object from this EMPLOYEE table with employee id assigned by method's argument.
+     * It does not actually remove the column from the table, but sets the value to leavedDate.
      *
      * @param id         employee id
      * @param leavedDate Leaved Date.
