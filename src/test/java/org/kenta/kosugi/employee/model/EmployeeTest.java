@@ -93,8 +93,8 @@ public class EmployeeTest {
 
     @Test
     public void setHiredDate002() throws ParseException {
-//        expectedException.expect(ParseException.class);
-//        expectedException.expectMessage("Unparseable date: \"Kenta\"");
+        expectedException.expect(ParseException.class);
+        expectedException.expectMessage("Unparseable date: \"Kenta\"");
 
         var employee = new Employee();
 
