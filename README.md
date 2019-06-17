@@ -87,7 +87,6 @@ Spring Boot(Spring BootはDell配下のPivotal開発て知ってました?)はJP
 |cdi|Dependency Injectionを利用する。|
 
 認識しているのは上記だが、Mavenの依存関係自動解決で他にも色々適用されている様子。
-![](./img/1.png)
 
 # API 仕様(現時点)
 1. すべてのEmployeeを検索
