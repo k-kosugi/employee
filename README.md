@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/k-kosugi/employee/tree/master.svg?style=svg)](https://circleci.com/gh/k-kosugi/employee/tree/master)
 # 目的
 thorntailお勉強のために作成。  
 thorntailとはなんぞやという人は[ここ](https://www.publickey1.jp/blog/17/javamicroprofileeclipse.html)や[ここ](https://www.infoq.com/jp/news/2018/06/wildfly-thorntail)がおすすめ。
