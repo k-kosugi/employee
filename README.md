@@ -22,21 +22,27 @@ Spring Boot(Spring BootはDell配下のPivotal開発て知ってました?)はJP
 
 # 使い方
 
+## 0. 準備
+1. Dockerネットワークの作成
+    ```
+    $ docker network create employee
+    ```
+
 ## 1. MySQLの起動
 データベースはMySQL on docker。
 以下のコマンドを投入してdockerを起動。
 
-1. Dockerfileが存在するディレクトリでdockerイメージをビルド。タグ名はnetapp/employeedb:v1だが他のものでも問題なし。
+1. Dockerfileが存在するディレクトリでdockerイメージをビルド。タグ名はkenta.kosugi/employee-db:v1だが他のものでも問題なし。もし、変更する場合はproject-defaults.yamlのconnection-urlも合わせて変更しておく。
     ```
-    $ docker build -t netapp/employeedb:v1 -f Dockerfile.mysql . 
+    $ docker build -t kenta.kosugi/employee-db:v1 -f Dockerfile.mysql . 
     ```
 2. イメージを元に起動。
     * 以下はビルド時に永続ボリュームを指定していないので注意が必要です。
-    * もし、コンテナを削除してテーブルデータが消えたら問題がある人は -v employeedb_volume:/var/lib/mysqlをオプションで投入するなりして永続ボリュームを適用しましょう。
+    * もし、コンテナを削除してテーブルデータが消えたら問題がある人は -v employee-db_volume:/var/lib/mysqlをオプションで投入するなりして永続ボリュームを適用しましょう。
     ```
-    $ docker run -d --name employeedb -p 3306:3306 netapp/employeedb:v1
+    $ docker run -d --name employee-db -p 3306:3306 --network employee kenta.kosugi/employee-db:v1
     ```
-## 2. Thorntailのビルドと起動
+## 2. Thorntailのビルドとコンテナ化
 1. Mavenのpackageゴールを指定してwar/jarを作成
     ```
     $ mvn package
@@ -46,10 +52,13 @@ Spring Boot(Spring BootはDell配下のPivotal開発て知ってました?)はJP
         * こちらがwarファイルのようです。試していませんが、Wildflyなどにデプロイすれば普通に動くのではないかと思います。
     * target/employee-thorntail.jar
         * こちらがuberjarと呼ばれるファイル。内部にthorntailを起動するためのBootStrapや起動に必要なjar群が固まって格納されています。
-1. java コマンドを使用してjarファイルを起動。
-    * ./employeディレクトリ上でjavaコマンドを投入する場合は -s以下不要。
+1. Dockerfileを使用してthorntailを起動するコンテナをイメージ化
     ```
-    $ java -jar target/employee-thorntail.jar -s<project-defaults.yamlの相対パス>
+    $ docker build -t kenta.kosugi/employee-api:v1 -f Dockefile.thorntail .
+    ```
+1. 作成したイメージを利用してthorntailを起動
+    ```
+    $ docker run -d --name employee-api -p 8080:8080 --network employee kenta.kosugi/employee-api:v1
     ```
 ## 3. MySQLへのデータの投入    
 3. データの投入。 
