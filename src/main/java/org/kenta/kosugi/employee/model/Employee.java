@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -32,15 +31,17 @@ public class Employee implements Serializable {
     private String id;
 
     /**
-     * Get the primary key for this employee.
-     * @return return the primary key.
+     * Get primary key for this employee.
+     *
+     * @return primary key.
      */
     public String getId() {
-        return id;
+        return this.id;
     }
 
     /**
      * Set the primary key for this employee.
+     *
      * @param id primary key
      */
     public void setId(String id) {
@@ -184,7 +185,7 @@ public class Employee implements Serializable {
      *
      * @param date The date of String for example "20190901"
      * @return Return the Calendar object.
-     * @throws ParseException
+     * @throws ParseException Throw ParseException when SimpleDateFormat.parse(String) method fail.
      */
     @Transient
     private Date parse(String date) throws ParseException {
@@ -193,7 +194,8 @@ public class Employee implements Serializable {
             return null;
         }
 
-        return simpleDateFormat.parse(date);
+        // parsing
+        return this.simpleDateFormat.parse(date);
 
     }
 

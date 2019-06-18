@@ -3,10 +3,14 @@ thorntail:
     data-sources:
       MyDS:
         driver-name: mysql
-        connection-url: jdbc:mysql://localhost:3306/employee
+        connection-url: jdbc:mysql://employee-db:3306/employee
         user-name: kenta
         password: kosugi
         valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
         validate-on-match: true
         background-validation: false
         exception-sorter-class-name: org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter
+  deployment:
+    employee.war:
+      swagger:
+        - packages: org.wildfly.swarm.examples.jaxrs.swagger
