@@ -42,7 +42,7 @@ public class EmployeeResource {
      * @return Return employee object with using employee id.
      */
     @GET
-    @Path("/find/{id}")
+    @Path("/{id}")
     public Employee find(@PathParam("id") String id) {
         return this.em.find(Employee.class, id);
     }
@@ -58,8 +58,8 @@ public class EmployeeResource {
      * @return Return 200 OK response when request success.
      */
     @POST
-    @Path("/regist/{id}")
-    public Response registEmployee(
+    @Path("/register/{id}")
+    public Response registerEmployee(
             @PathParam("id") String id,
             @QueryParam("firstName") String firstName,
             @QueryParam("middleName") String middleName,

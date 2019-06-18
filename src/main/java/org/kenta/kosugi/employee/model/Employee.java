@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Employee class for employee.EMPLOYEE table.
@@ -16,7 +17,7 @@ import java.util.Calendar;
         @Index(name = "IDX_LAST_NAME", columnList = "LAST_NAME")
 })
 @NamedQueries({
-        @NamedQuery(name = "Employee.findAll", query = "select a from Employee a where a.leavedDate is not null"),
+        @NamedQuery(name = "Employee.findAll", query = "select a from Employee a where a.leavedDate is null"),
         @NamedQuery(name = "Employee.findByName", query = "select a from Employee a where (a.firstName like :name or a.lastName like :name) and a.leavedDate is not null")
 })
 public class Employee implements Serializable {
@@ -28,11 +29,28 @@ public class Employee implements Serializable {
      */
     @Id
     @Column(name = "ID", length = 8)
-    public String id;
+    private String id;
+
+    /**
+     * Get the primary key for this employee.
+     * @return return the primary key.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set the primary key for this employee.
+     * @param id primary key
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * First Name associated with this employee object.
      */
+    @Column(name = "FIRST_NAME", length = 32)
     private String firstName;
 
     /**
@@ -40,7 +58,6 @@ public class Employee implements Serializable {
      *
      * @return The first name associated with this employee object.
      */
-    @Column(name = "FIRST_NAME", length = 32)
     public String getFirstName() {
         return this.firstName;
     }
@@ -54,6 +71,7 @@ public class Employee implements Serializable {
         this.firstName = firstName;
     }
 
+    @Column(name = "MIDDLE_NAME", length = 32, nullable = true)
     private String middleName;
 
     /**
@@ -61,7 +79,6 @@ public class Employee implements Serializable {
      *
      * @return Middle name associated with this employee.
      */
-    @Column(name = "MIDDLE_NAME", length = 32, nullable = true)
     public String getMiddleName() {
         return this.middleName;
     }
@@ -73,6 +90,7 @@ public class Employee implements Serializable {
         this.middleName = middleName;
     }
 
+    @Column(name = "LAST_NAME", length = 32)
     private String lastName;
 
     /**
@@ -80,7 +98,6 @@ public class Employee implements Serializable {
      *
      * @return Last name associated with this employee object.
      */
-    @Column(name = "LAST_NAME", length = 32)
     public String getLastName() {
         return this.lastName;
     }
@@ -89,6 +106,7 @@ public class Employee implements Serializable {
         this.lastName = lastName;
     }
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Employee boss;
 
     /**
@@ -96,7 +114,6 @@ public class Employee implements Serializable {
      *
      * @return The boss object associated with this employee.
      */
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Employee getBoss() {
         return this.boss;
     }
@@ -110,7 +127,9 @@ public class Employee implements Serializable {
         this.boss = boss;
     }
 
-    private Calendar hireDate;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "HIRE_DATE", nullable = false)
+    private Date hireDate;
 
     /**
      * Set the hired date associated with this employee.
@@ -127,16 +146,16 @@ public class Employee implements Serializable {
      *
      * @return Hire Date associated with this employee.
      */
-    @Temporal(TemporalType.DATE)
-    @Column(name = "HIRE_DATE", nullable = false)
-    public Calendar getHireDate() {
+    public Date getHireDate() {
         return hireDate;
     }
 
     /**
      * The leaved Date.
      */
-    private Calendar leavedDate;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "LEAVED_DATE")
+    private Date leavedDate;
 
     /**
      * Set leaved date to employee object.
@@ -153,9 +172,7 @@ public class Employee implements Serializable {
      *
      * @return Leaved Date associated with this employee.
      */
-    @Temporal(TemporalType.DATE)
-    @Column(name = "LEAVED_DATE")
-    public Calendar getLeavedDate() {
+    public Date getLeavedDate() {
         return this.leavedDate;
     }
 
@@ -170,17 +187,13 @@ public class Employee implements Serializable {
      * @throws ParseException
      */
     @Transient
-    private Calendar parse(String date) throws ParseException {
+    private Date parse(String date) throws ParseException {
 
         if (date == null) {
             return null;
         }
 
-        Calendar cal = Calendar.getInstance();
-
-        cal.setTime(simpleDateFormat.parse(date));
-
-        return cal;
+        return simpleDateFormat.parse(date);
 
     }
 
