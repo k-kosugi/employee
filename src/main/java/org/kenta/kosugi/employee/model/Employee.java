@@ -8,6 +8,8 @@ import java.util.Date;
 
 /**
  * Employee class for employee.EMPLOYEE table.
+ *
+ * @author Kenta Kosugi
  */
 @Entity
 @Table(name = "EMPLOYEE", indexes = {

@@ -16,6 +16,8 @@ import java.util.List;
 /**
  * Employee class.
  * This class is EJB Object(Stateless Session Bean) for using JTA transaction.
+ *
+ * @author Kenta Kosugi
  */
 @Path("/employee")
 @Produces(MediaType.APPLICATION_JSON)
