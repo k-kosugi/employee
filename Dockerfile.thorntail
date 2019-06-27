@@ -1,4 +1,5 @@
 FROM openjdk:11-oracle
+EXPOSE 8080
 COPY ./target/employee-thorntail.jar /
 COPY ./project-defaults.yaml /
 ENTRYPOINT ["java", "-jar", "employee-thorntail.jar", "-Djava.net.preferIPv4Stack=true"]

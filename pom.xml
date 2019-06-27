@@ -69,6 +69,10 @@
             <groupId>io.thorntail</groupId>
             <artifactId>arquillian</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.thorntail</groupId>
+            <artifactId>swagger</artifactId>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>

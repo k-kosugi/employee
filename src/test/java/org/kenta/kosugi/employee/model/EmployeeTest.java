@@ -49,7 +49,9 @@ public class EmployeeTest {
     @Test
     public void setFirstName() {
         var target = new Employee();
+        target.setFirstName(null);
 
+        assertNull(target.getFirstName());
     }
 
     @Test

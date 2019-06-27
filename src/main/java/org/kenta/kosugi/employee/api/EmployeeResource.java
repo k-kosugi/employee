@@ -1,5 +1,7 @@
 package org.kenta.kosugi.employee.api;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.kenta.kosugi.employee.model.Employee;
 
 import javax.ejb.Stateless;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 @Path("/employee")
 @Produces(MediaType.APPLICATION_JSON)
+@Api(value = "/employee", tags = "employee")
 @Stateless
 public class EmployeeResource {
 
@@ -30,6 +33,7 @@ public class EmployeeResource {
      */
     @GET
     @Path("/all")
+    @ApiOperation(value = "Get all employoee from EMPLOYEE table.")
     public List<Employee> all() {
         return this.em.createNamedQuery("Employee.findAll", Employee.class)
                 .getResultList();
@@ -106,6 +110,7 @@ public class EmployeeResource {
         // Set boss object to employee object.
         employee.setBoss(boss);
 
+        // Merge employee object
         this.em.merge(employee);
 
         return Response.ok().build();
